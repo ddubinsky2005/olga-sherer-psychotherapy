@@ -1,4 +1,4 @@
-# Cloudflare Pages — caching & security headers (ignored by GitHub Pages)
+# Cloudflare caching & security headers (ignored by GitHub Pages)
 
 /*
   X-Content-Type-Options: nosniff
@@ -6,11 +6,25 @@
   X-Frame-Options: SAMEORIGIN
   Permissions-Policy: geolocation=(), microphone=(), camera=()
 
-/assets/*
+# Fonts are the only genuinely immutable assets here: the subset files are
+# fixed builds of Rubik, and a different font would get a different filename.
+/assets/fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
+# CSS and JS are edited in place under the same filename, so they must NOT be
+# immutable — otherwise a deploy leaves edges serving the old file for a year
+# and a visitor can get new HTML with stale CSS. Revalidation costs one
+# conditional request that answers 304 (~100 bytes); brotli'd CSS is 4 KB.
+/assets/css/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+/assets/js/*
+  Cache-Control: public, max-age=0, must-revalidate
+
+# Images may be replaced under the same name (a new portrait, a better room
+# photo), so a day with revalidation instead of a year.
 /images/*
-  Cache-Control: public, max-age=31536000, immutable
+  Cache-Control: public, max-age=86400, must-revalidate
 
 /index.html
   Cache-Control: public, max-age=0, must-revalidate
