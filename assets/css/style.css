@@ -208,6 +208,42 @@ html[lang="ru"] [lang="he"] { display: none !important; }
 }
 .lang-switch button[aria-pressed="true"] { background: var(--sage-deep); color: #fff; }
 
+/* Single-tap language toggle — shown on mobile instead of .lang-switch.
+   Its label is the language the visitor would switch TO. */
+.lang-toggle {
+  display: none;
+  align-items: center;
+  gap: .35rem;
+  flex: none;
+  appearance: none;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 999px;
+  padding: .38rem .8rem;
+  min-height: 38px; /* same height as .nav-toggle beside it — aligned, thumb-sized */
+  font: inherit;
+  font-size: .82rem;
+  line-height: 1.5;
+  color: var(--ink);
+  cursor: pointer;
+}
+.lang-toggle:hover { border-color: var(--sage); color: var(--sage-deep); }
+.lang-toggle svg {
+  width: 15px; height: 15px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+}
+
+/* The toggle deliberately shows the OTHER language, so its label visibility is
+   inverted relative to the global html[lang] rules — hence the !important,
+   which only ever overrides those two rules. */
+html[lang="he"] .lang-toggle [lang="ru"],
+html[lang="ru"] .lang-toggle [lang="he"] { display: inline !important; }
+html[lang="he"] .lang-toggle [lang="he"],
+html[lang="ru"] .lang-toggle [lang="ru"] { display: none !important; }
+
 .nav-toggle {
   display: none;
   appearance: none;
@@ -499,7 +535,8 @@ html[dir="ltr"] .link-arrow:hover::after { transform: translateX(3px); }
   .site-nav ul { flex-direction: column; gap: 0; }
   .site-nav li + li { border-block-start: 1px solid var(--line); }
   .site-nav a { padding: .75rem .2rem; font-size: 1.02rem; }
-  .lang-switch { align-self: flex-start; margin-top: .5rem; }
+  .lang-toggle { display: inline-flex; }
+  .lang-switch { display: none; } /* replaced by .lang-toggle in the header */
   .header-inner { position: relative; }
   .cta-row .btn { flex: 1 1 100%; }
   .center-row .btn { flex: 1 1 100%; }

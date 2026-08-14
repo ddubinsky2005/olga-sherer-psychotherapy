@@ -86,6 +86,17 @@
       </span>
     </a>
 
+    <!-- Mobile language toggle: always visible in the sticky header, so the
+         switch never hides behind the hamburger. Its label is the language you
+         would switch TO, so one tap is enough. Desktop uses .lang-switch. -->
+    <button class="lang-toggle" type="button" data-toggle-lang>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M3 12h18M12 3c2.5 2.6 2.5 15.4 0 18M12 3C9.5 5.6 9.5 18.4 12 21"/>
+      </svg>
+      <span lang="ru">Рус</span><span lang="he">עברית</span>
+    </button>
+
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="תפריט">
       <span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span>
     </button>

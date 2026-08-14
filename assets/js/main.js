@@ -97,13 +97,44 @@
 
   applyLang(detectLang());
 
+  /* ---------- keep the address bar in sync -------------------------------- */
+  /* So the visitor can just copy the URL and whoever opens it lands on the
+     same language. replaceState, not pushState: Back should leave the site
+     rather than undo a toggle. Called only on an explicit switch — a URL
+     without ?lang= keeps auto-detection working for the recipient. */
+  function syncUrl(lang) {
+    if (!window.history || !history.replaceState) return;
+    try {
+      var url = new URL(window.location.href);
+      url.searchParams.set('lang', lang);
+      // the legacy #he/#ru form would now contradict ?lang=, so drop it —
+      // but never touch a section anchor like #about
+      if (META[url.hash.replace('#', '')]) url.hash = '';
+      history.replaceState(history.state, '', url.toString());
+    } catch (e) {
+      /* file:// origins reject replaceState — harmless, language still switches */
+    }
+  }
+
   /* ---------- language buttons ------------------------------------------- */
+  function setLang(lang) {
+    applyLang(lang);
+    syncUrl(lang);
+    try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) { /* private mode */ }
+    closeNav();
+  }
+
+  /* desktop: two-button pill */
   Array.prototype.forEach.call(document.querySelectorAll('[data-set-lang]'), function (btn) {
     btn.addEventListener('click', function () {
-      var lang = btn.getAttribute('data-set-lang');
-      applyLang(lang);
-      try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) { /* ignore */ }
-      closeNav();
+      setLang(btn.getAttribute('data-set-lang'));
+    });
+  });
+
+  /* mobile: single toggle in the header — flips to the other language */
+  Array.prototype.forEach.call(document.querySelectorAll('[data-toggle-lang]'), function (btn) {
+    btn.addEventListener('click', function () {
+      setLang(html.getAttribute('lang') === 'ru' ? 'he' : 'ru');
     });
   });
 
