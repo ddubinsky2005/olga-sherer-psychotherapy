@@ -53,7 +53,7 @@
     setMeta('meta[name="twitter:description"]', 'content', cfg.description);
 
     // WhatsApp greeting in the visitor's language
-    var waHref = 'https://wa.me/' + WA_NUMBER + '?text=' + cfg.wa;
+    var waHref = 'https://wa.me/' + WA_NUMBER; //+ '?text=' + cfg.wa;
     Array.prototype.forEach.call(document.querySelectorAll('[data-wa]'), function (a) {
       a.setAttribute('href', waHref);
     });
