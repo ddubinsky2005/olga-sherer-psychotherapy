@@ -433,13 +433,14 @@ html[dir="ltr"] .link-arrow:hover::after { transform: translateX(3px); }
   box-shadow: var(--shadow-sm);
   border-inline-start: 3px solid var(--sand);
 }
-.poem blockquote { margin: 0; font-size: 1.05rem; line-height: 1.9; color: var(--ink); }
+.poem blockquote { margin: 0; font-size: 1.1rem; line-height: 1.9; color: var(--ink); }
 .poem figcaption {
   margin-top: 1rem;
-  font-size: .8rem;
+  /*font-size: .8rem;*/
   letter-spacing: .12em;
   text-transform: uppercase;
   color: var(--muted);
+  text-align: right;
 }
 
 /* --------------------------------------------------------------------------
