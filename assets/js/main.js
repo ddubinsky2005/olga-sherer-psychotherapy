@@ -30,6 +30,8 @@
   };
 
   var html = document.documentElement;
+  // single-language pages (articles) pin it here and keep their own title/meta
+  var FIXED_LANG = html.getAttribute('data-lang-fixed');
   var navEl = document.getElementById('site-nav');
   var toggle = document.querySelector('.nav-toggle');
 
@@ -43,14 +45,16 @@
 
     html.setAttribute('lang', lang);
     html.setAttribute('dir', cfg.dir);
-    document.title = cfg.title;
 
-    setMeta('meta[name="description"]', 'content', cfg.description);
-    setMeta('meta[property="og:title"]', 'content', cfg.title);
-    setMeta('meta[property="og:description"]', 'content', cfg.description);
-    setMeta('meta[property="og:locale"]', 'content', cfg.ogLocale);
-    setMeta('meta[name="twitter:title"]', 'content', cfg.title);
-    setMeta('meta[name="twitter:description"]', 'content', cfg.description);
+    if (!FIXED_LANG) {
+      document.title = cfg.title;
+      setMeta('meta[name="description"]', 'content', cfg.description);
+      setMeta('meta[property="og:title"]', 'content', cfg.title);
+      setMeta('meta[property="og:description"]', 'content', cfg.description);
+      setMeta('meta[property="og:locale"]', 'content', cfg.ogLocale);
+      setMeta('meta[name="twitter:title"]', 'content', cfg.title);
+      setMeta('meta[name="twitter:description"]', 'content', cfg.description);
+    }
 
     // WhatsApp greeting in the visitor's language
     var waHref = 'https://wa.me/' + WA_NUMBER; //+ '?text=' + cfg.wa;
@@ -75,6 +79,8 @@
   /* The inline head script already resolved it before first paint; trust that
      so we never re-flow the page. The chain below is only a fallback. */
   function detectLang() {
+    if (META[FIXED_LANG]) return FIXED_LANG;
+
     if (html.hasAttribute('data-lang-resolved')) {
       var resolved = html.getAttribute('lang');
       if (META[resolved]) return resolved;

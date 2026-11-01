@@ -9,4 +9,10 @@
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
   </url>
+  <url>
+    <loc>https://olga-sherer-psychotherapy.com/articles/myths-about-psychological-therapy/</loc>
+    <xhtml:link rel="alternate" hreflang="he" href="https://olga-sherer-psychotherapy.com/articles/myths-about-psychological-therapy/"/>
+    <changefreq>yearly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>
