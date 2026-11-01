@@ -466,6 +466,8 @@ html[dir="ltr"] .link-arrow:hover::after { transform: translateX(3px); }
 .card-note { color: var(--muted); font-style: italic; }
 .card-article { border-inline-start: 3px solid var(--sage); }
 .card-article .link-arrow { margin-top: .4rem; }
+.card h3 a { color: inherit; text-decoration: none; }
+.card h3 a:hover { color: var(--sage-deep); text-decoration: underline; }
 
 /* --------------------------------------------------------------------------
    Article pages
