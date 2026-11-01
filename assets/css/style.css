@@ -465,6 +465,45 @@ html[dir="ltr"] .link-arrow:hover::after { transform: translateX(3px); }
 .card h3 { color: var(--ink); }
 .card-note { color: var(--muted); font-style: italic; }
 .card-article { border-inline-start: 3px solid var(--sage); }
+.card-article .link-arrow { margin-top: .4rem; }
+
+/* --------------------------------------------------------------------------
+   Article pages
+   -------------------------------------------------------------------------- */
+.article-head {
+  padding-block: clamp(2.4rem, 6vw, 4.5rem) clamp(2rem, 4vw, 3rem);
+  background: var(--cream-deep);
+}
+.article-head h1 { font-size: clamp(1.8rem, 4.6vw, 2.8rem); }
+.article-lead { color: var(--muted); font-style: italic; font-size: clamp(1.02rem, 1.5vw, 1.12rem); }
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1.4rem;
+  font-size: .92rem;
+  text-decoration: none;
+}
+.back-link::before { content: "←"; margin-inline-end: .4em; }
+html[dir="rtl"] .back-link::before { content: "→"; }
+.back-link:hover { text-decoration: underline; }
+
+.article-body { padding-block: clamp(2.4rem, 6vw, 4rem); }
+.article-body h2 {
+  margin: 2.4em 0 .8em;
+  padding-inline-start: 1rem;
+  border-inline-start: 3px solid var(--sage);
+  font-size: clamp(1.2rem, 2.4vw, 1.45rem);
+}
+.article-body h2:first-child { margin-top: 0; }
+
+.article-end {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .8rem;
+  margin-top: clamp(2.4rem, 5vw, 3.5rem);
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--line);
+}
 
 /* --------------------------------------------------------------------------
    Contact
